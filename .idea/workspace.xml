@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="333744ed-2d71-4ab7-baa5-f123b00b1e2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/lib/kafka/producer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7cc7ce0d-34c2-4521-80e9-22614d3487fd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7cc7ce0d-34c2-4521-80e9-22614d3487fd.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/sso/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/sso/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/local.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/grpc/auth/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/grpc/auth/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/services/auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/auth/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/sso.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/sso.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/auth_register_login_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/auth_register_login_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-data/__consumer_offsets-6/00000000000000000000.log" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-data/__consumer_offsets-6/00000000000000000000.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka-data/replication-offset-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/kafka-data/replication-offset-checkpoint" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
