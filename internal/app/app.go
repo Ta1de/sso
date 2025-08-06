@@ -5,12 +5,14 @@ import (
 	"time"
 
 	grpcapp "sso/internal/app/grpc"
+	"sso/internal/lib/kafka"
 	"sso/internal/services/auth"
 	"sso/internal/storage/sqlite"
 )
 
 type App struct {
-	GRPCSrv *grpcapp.App
+	GRPCSrv       *grpcapp.App
+	KafkaProducer *kafka.Producer
 }
 
 func New(
@@ -18,17 +20,19 @@ func New(
 	grpcProt int,
 	storagePath string,
 	tokenTTL time.Duration,
+	producer *kafka.Producer,
 ) *App {
 	storage, err := sqlite.New(storagePath)
 	if err != nil {
 		panic(err)
 	}
 
-	authService := auth.New(log, storage, storage, storage, tokenTTL)
+	authService := auth.New(log, storage, storage, storage, tokenTTL, producer)
 
 	grpcApp := grpcapp.New(log, authService, grpcProt)
 
 	return &App{
-		GRPCSrv: grpcApp,
+		GRPCSrv:       grpcApp,
+		KafkaProducer: producer,
 	}
 }

@@ -8,6 +8,7 @@ import (
 
 	"sso/internal/app"
 	"sso/internal/config"
+	"sso/internal/lib/kafka"
 	"sso/internal/lib/logger/handlers/slogpretty"
 )
 
@@ -22,9 +23,17 @@ func main() {
 
 	log := setupLogger(cfg.Env)
 
+	kafkaProducer := kafka.NewProducer(
+		cfg.Kafka.Brokers,
+		cfg.Kafka.Topic,
+		cfg.Kafka.ClientID,
+		log,
+	)
+	defer kafkaProducer.Close()
+
 	log.Info("starting application", slog.Any("config", cfg))
 
-	application := app.New(log, cfg.GRPC.Port, cfg.StoragePath, cfg.TokenTTL)
+	application := app.New(log, cfg.GRPC.Port, cfg.StoragePath, cfg.TokenTTL, kafkaProducer)
 
 	go application.GRPCSrv.MustRun()
 

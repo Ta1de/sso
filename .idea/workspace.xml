@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="333744ed-2d71-4ab7-baa5-f123b00b1e2b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/storage/sqlite/sqlite.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/auth_register_login_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/migrations/1_init_apps.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/suite/suite.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/lib/kafka/producer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7cc7ce0d-34c2-4521-80e9-22614d3487fd.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7cc7ce0d-34c2-4521-80e9-22614d3487fd.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/sso/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/sso/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/local.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/local.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/grpc/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/grpc/app.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/grpc/auth/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/grpc/auth/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/storage/storege.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/storage/storage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/auth/auth.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/sso.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/sso.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/auth_register_login_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/auth_register_login_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +81,16 @@
       <recent name="$PROJECT_DIR$/internal/lib" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="TestRegisterLogin_Login_HappyPath in sso/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.go test tests">
+    <configuration name="go build sso/tests" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="sso" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sso/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestLogin_FailCases in sso/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="sso" />
       <working_directory value="$PROJECT_DIR$/tests" />
       <root_directory value="$PROJECT_DIR$" />
@@ -92,18 +99,68 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestRegisterLogin_Login_HappyPath\E$" />
+      <pattern value="^\QTestLogin_FailCases\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestRegisterLogin_DuplicatedRegistration in sso/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sso" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sso/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestRegisterLogin_DuplicatedRegistration\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestRegister_FailCases in sso/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sso" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="sso/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestRegister_FailCases\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sso" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <package value="sso/tests" />
+      <directory value="$PROJECT_DIR$/tests" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestRegisterLogin_Login_HappyPath in sso/tests" />
+        <item itemvalue="Go Test.go test tests" />
+        <item itemvalue="Go Build.go build sso/tests" />
+        <item itemvalue="Go Test.TestLogin_FailCases in sso/tests" />
+        <item itemvalue="Go Test.TestRegister_FailCases in sso/tests" />
+        <item itemvalue="Go Test.TestRegisterLogin_DuplicatedRegistration in sso/tests" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

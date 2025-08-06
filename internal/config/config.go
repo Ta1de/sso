@@ -13,11 +13,18 @@ type Config struct {
 	TokenTTL    time.Duration `yaml:"token_ttl"`
 	StoragePath string        `yaml:"storage_path" env-required:"true"`
 	GRPC        GRPCConfig    `yaml:"grpc"`
+	Kafka       Kafka         `yaml:"kafka"`
 }
 
 type GRPCConfig struct {
 	Port    int           `yaml:"port"`
 	Timeout time.Duration `yaml:"timeout"`
+}
+
+type Kafka struct {
+	Brokers  []string `yaml:"brokers"`
+	Topic    string   `yaml:"topic"`
+	ClientID string   `yaml:"client_id"`
 }
 
 func MustLoad() *Config {

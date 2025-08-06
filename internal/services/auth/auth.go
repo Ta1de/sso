@@ -9,6 +9,7 @@ import (
 
 	"sso/internal/domain/models"
 	"sso/internal/lib/jwt"
+	"sso/internal/lib/kafka"
 	"sso/internal/lib/logger/sl"
 	"sso/internal/storage"
 
@@ -21,12 +22,14 @@ type Auth struct {
 	usrProvider UserProvider
 	appProvider AppProvider
 	tokenTTL    time.Duration
+	producer    *kafka.Producer
 }
 
 var (
 	ErrInvalidCredentials = errors.New("invalid credentials")
 	ErrUserExists         = errors.New("user already exists")
 	ErrInvalidAppID       = errors.New("invalid app id")
+	ErrUserNotFound       = errors.New("user not found")
 )
 
 type UserSaver interface {
@@ -52,6 +55,7 @@ func New(
 	userProvider UserProvider,
 	appProvider AppProvider,
 	tokenTTL time.Duration,
+	producer *kafka.Producer,
 ) *Auth {
 	return &Auth{
 		usrSaver:    userSaver,
@@ -59,6 +63,7 @@ func New(
 		log:         log,
 		appProvider: appProvider,
 		tokenTTL:    tokenTTL,
+		producer:    producer,
 	}
 }
 
@@ -109,7 +114,24 @@ func (a *Auth) Login(
 		return "", fmt.Errorf("%s: %w", op, err)
 	}
 
+	if err := a.sendUserLoggedInEvent(ctx, user.ID, email, appID, token); err != nil {
+		a.log.Error("failed to send login event", sl.Err(err))
+	}
+
 	return token, nil
+}
+
+func (a *Auth) sendUserLoggedInEvent(ctx context.Context, userID int64, email string, appID int, token string) error {
+	event := map[string]interface{}{
+		"event_type": "user_logged_in",
+		"user_id":    userID,
+		"email":      email,
+		"app_id":     appID,
+		"token":      token,
+		"timestamp":  time.Now().UTC(),
+	}
+
+	return a.producer.Publish(ctx, fmt.Sprintf("user_%d", userID), event)
 }
 
 func (a *Auth) RegisterNewUser(
@@ -144,7 +166,22 @@ func (a *Auth) RegisterNewUser(
 
 	log.Info("New user registered")
 
+	if err := a.sendUserRegisteredEvent(ctx, id, email); err != nil {
+		log.Error("failed to send registration event", sl.Err(err))
+	}
+
 	return id, nil
+}
+
+func (a *Auth) sendUserRegisteredEvent(ctx context.Context, userID int64, email string) error {
+	event := map[string]interface{}{
+		"event_type": "user_registered",
+		"user_id":    userID,
+		"email":      email,
+		"timestamp":  time.Now().UTC(),
+	}
+
+	return a.producer.Publish(ctx, fmt.Sprintf("user_%d", userID), event)
 }
 
 func (a *Auth) IsAdmin(ctx context.Context, userID int64) (bool, error) {
